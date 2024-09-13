@@ -1,0 +1,28 @@
+/* 기본 스타일 (데스크탑) */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* 공통 스타일 */
+h1 {
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* 모바일 화면용 스타일 */
+@media (max-width: 425px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
