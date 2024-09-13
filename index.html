@@ -6,31 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
-    <!-- my.css 파일 연결 -->
     <link rel="stylesheet" href="my.css">
-    
+
+    <!--font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <!-- index 목록 -->
-    <link href="/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">
-    <link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
-    <meta name="theme-color" content="#712cf9">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- list -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
     <style>
+        /* html, body에 전체 높이를 설정하고 flexbox 사용 */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar-nav .nav-item {
+            margin-right: 20px;
+            /* 항목 간의 간격 설정 */
+        }
+
+        .content-container {
+            flex: 1;
+            margin-left: 260px;
+            padding: 20px;
+        }
+
+        .custom-margin {
+            margin-right: 3px;
+        }
+
+        /* 테이블 스타일 */
         table {
             width: 80%;
             margin: 0 auto;
@@ -41,92 +51,188 @@
         td {
             text-align: center;
             border: 1px solid #dee2e6;
+            border-radius: 3px;
+        }
+
+        h2 {
+            margin-left: 20px;
+        }
+
+        footer {
+            text-align: center;
+        }
+
+        .footer i {
+            font-size: 24px;
+            margin-right: 10px;
         }
 
 
-        h3 {
-            margin-left: 20px;
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            border-radius: 10px;
+            top: 0;
+            left: 0;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+            padding-left: 15px;
+            color: black;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-            <a href="/"
-                class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                <svg class="bi me-2" width="40" height="32">
-                    <use xlink:href="#bootstrap" />
-                </svg>
-                <span class="fs-4">User Information</span>
-            </a>
-
+    <!-- 사이드바 -->
+    <div class="sidebar">
+        <i class="fa fa-align-justify fa-2x" aria-hidden="true"></i>
+        <hr>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a href="https://hw3-22200356.netlify.app/add.html" class="nav-link active"
+                            aria-current="page">Add</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"></li>
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="https://hw3-22200356.netlify.app/add.html" class="nav-link active"
-                        aria-current="page">Add</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">Delete</a></li>
+            </ul>
+            </li>
+            <li class="nav-item"></li>
+            <ul class="nav nav-pills">
                 <li class="nav-item"><a href="#" class="nav-link">Edit</a></li>
+            </ul>
+            </li>
+            <li class="nav-item"></li>
+            <ul class="nav nav-pills">
                 <li class="nav-item"><a href="#" class="nav-link">View</a></li>
             </ul>
-        </header>
+            </li>
+
+        </ul>
     </div>
-    <div class="container">
-        <h2>Table</h2>
-        <div class="table-responsive">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Username</th>
-                        <th>Id</th>
-                        <th>Email</th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><a href="https://hw3-22200356.netlify.app/view.html">1</a></td>
-                        <td>Anna</td>
-                        <td>Moonlight</td>
-                        <td>anna123</td>
-                        <td>anna123@abc.com</td>
-                    </tr>
-                    
+    <!-- 메인 콘텐츠 -->
+    <div class="content-container">
+        <div class="container">
+            <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <a href="/"
+                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32">
+                        <use xlink:href="#bootstrap" />
+                    </svg>
+                    <span class="fs-4"><i class="fa fa-address-card fa-2x" aria-hidden="true"></i></span>
+                </a>
 
-                    <tr>
-                        <td>2</td>
-                        <td>Lucas</td>
-                        <td>Skywalker</td>
-                        <td>lucas4421</td>
-                        <td>lucas4421@abc.com</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Noah</td>
-                        <td>Stardust</td>
-                        <td>noah323</td>
-                        <td>noah323@def.com</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Ava</td>
-                        <td>NightOwl</td>
-                        <td>ava789</td>
-                        <td>ava789@dot.com</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>Liam</td>
-                        <td>Thunderbolt</td>
-                        <td>Liam1357</td>
-                        <td>Liam1357@dot.com</td>
-                    </tr>
-                </tbody>
-            </table>
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <div class="container">
+                        <div class="d-flex ml-auto">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#globalNavbar" aria-controls="globalNavbar" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                        </div>
+                        <div class="collapse navbar-collapse" id="globalNavbar">
+                            <form class="form-inline form-navbar my-2 my-lg-0 order-2"
+                                action="https://themes.getbootstrap.com/shop/">
+                                <input class="form-control" name="s" type="text" placeholder="Search"
+                                    style="margin-right: 20px;" />
+                            </form>
+                            <ul class="navbar-nav mr-auto order-1">
+                                <li class="nav-item dropdown" style="margin-right: 20px;">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" href="#"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                        <!-- Categories content -->
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="navbar-nav d-none d-lg-flex ml-2 order-3">
+                                <li class="nav-item" style="margin-right: 20px;"><a class="nav-link"
+                                        href="https://themes.getbootstrap.com/signin/">Sign in</a></li>
+                                <li class="nav-item"><a class="nav-link"
+                                        href="https://themes.getbootstrap.com/my-account/">Sign up</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+
+            </header>
+        </div>
+
+        <div class="container">
+            <h2>User list</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Id</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><a href="https://hw3-22200356.netlify.app/view.html">Anna</a></td>
+                            <td>Moonlight</td>
+                            <td>anna123</td>
+                            <td>anna123@abc.com</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Lucas</td>
+                            <td>Skywalker</td>
+                            <td>lucas4421</td>
+                            <td>lucas4421@abc.com</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Noah</td>
+                            <td>Stardust</td>
+                            <td>noah323</td>
+                            <td>noah323@def.com</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Ava</td>
+                            <td>NightOwl</td>
+                            <td>ava789</td>
+                            <td>ava789@dot.com</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Liam</td>
+                            <td>Thunderbolt</td>
+                            <td>Liam1357</td>
+                            <td>Liam1357@dot.com</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-
+    <!-- footer -->
+    <footer class="footer mt-auto py-3 bg-body-tertiary">
+        <div class="container">
+            <span class="text-body-secondary">@22200356 Byundonghyun</span>
+            <a href="#">
+                <i class="fa fa-share float-end" aria-hidden="true"></i>
+            </a>
+            <a href="#">
+                <i class="fa fa-save float-end" aria-hidden="true"></i>
+            </a>
+            <a href="#">
+                <i class="fa fa-cog float-end" aria-hidden="true"></i>
+            </a>
+        </div>
+    </footer>
 </body>
 
 </html>
