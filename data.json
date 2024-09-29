@@ -1,0 +1,51 @@
+{
+    "personalInfo": [
+        {
+            "id": 1,
+            "name": "John Doe"
+        },
+        {
+            "id": 2,
+            "name": "Jane Smith"
+        },
+        {
+            "id": 3,
+            "name": "Alice Johnson"
+        },
+        {
+            "id": 4,
+            "name": "Bob Brown"
+        },
+        {
+            "id": 5,
+            "name": "Charlie White"
+        }
+    ],
+    "accountInfo": [
+        {
+            "id": 1,
+            "username": "johndoe",
+            "email": "johndoe@example.com"
+        },
+        {
+            "id": 2,
+            "username": "janesmith",
+            "email": "janesmith@example.com"
+        },
+        {
+            "id": 3,
+            "username": "alicej",
+            "email": "alicej@example.com"
+        },
+        {
+            "id": 4,
+            "username": "bobbrown",
+            "email": "bobbrown@example.com"
+        },
+        {
+            "id": 5,
+            "username": "charliew",
+            "email": "charliew@example.com"
+        }
+    ]
+}
