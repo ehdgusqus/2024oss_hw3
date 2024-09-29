@@ -3,142 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AJAX CRUD Example</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        input {
-            margin-bottom: 10px;
-        }
-    </style>
+    <title>AJAX CRUD</title>
 </head>
 <body>
-    <h1>AJAX CRUD Example</h1>
-
     <h2>Add New User</h2>
     <input type="text" id="name" placeholder="Name" />
-    <input type="text" id="username" placeholder="Username" />
-    <input type="email" id="email" placeholder="Email" />
     <button onclick="createUser()">Add User</button>
 
     <h2>User List</h2>
-    <div id="userList"></div>
+    <ul id="userList"></ul>
 
     <script>
-        const personalApiURL = 'http://localhost:3000/personalInfo';
-        const accountApiURL = 'http://localhost:3000/accountInfo';
+        const apiURL = 'http://localhost:3000/personalInfo'; 
 
-        // Fetch and display user data
+        // Read: Fetch all users and display them
         function getUsers() {
-            const userList = document.getElementById('userList');
-            userList.innerHTML = '';
-            
-            fetch(personalApiURL)
-                .then(response => response.json())
-                .then(personalData => {
-                    fetch(accountApiURL)
-                        .then(response => response.json())
-                        .then(accountData => {
-                            let output = '<table><thead><tr><th>ID</th><th>Name</th><th>Username</th><th>Email</th><th>Actions</th></tr></thead><tbody>';
-                            personalData.forEach((person, index) => {
-                                const account = accountData[index];
-                                output += `
-                                    <tr>
-                                        <td>${person.id}</td>
-                                        <td>${person.name}</td>
-                                        <td>${account.username}</td>
-                                        <td>${account.email}</td>
-                                        <td>
-                                            <button onclick="deleteUser(${person.id})">Delete</button>
-                                            <button onclick="editUser(${person.id})">Edit</button>
-                                        </td>
-                                    </tr>
-                                `;
-                            });
-                            output += '</tbody></table>';
-                            userList.innerHTML = output;
-                        });
-                });
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', apiURL, true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    const users = JSON.parse(xhr.responseText);
+                    let output = '';
+                    users.forEach(user => {
+                        output += `<li>${user.name} 
+                            <button onclick="deleteUser(${user.id})">Delete</button>
+                            <button onclick="editUser(${user.id}, '${user.name}')">Edit</button>
+                        </li>`;
+                    });
+                    document.getElementById('userList').innerHTML = output;
+                }
+            };
+            xhr.send();
         }
 
-        // Create a new user
+        // Create: Add a new user
         function createUser() {
             const name = document.getElementById('name').value;
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
-
-            if (name === '' || username === '' || email === '') {
-                alert('Please fill in all fields');
-                return;
-            }
-
-            // Create personal info
-            const personalData = { name };
-            fetch(personalApiURL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(personalData)
-            })
-            .then(response => response.json())
-            .then(newPerson => {
-                // Create account info
-                const accountData = { username, email };
-                fetch(accountApiURL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(accountData)
-                })
-                .then(response => response.json())
-                .then(() => getUsers());
-            });
+            if (!name) return alert('Enter a name');
+            
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', apiURL, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function() {
+                if (xhr.status === 201) getUsers(); // Reload user list after creation
+            };
+            xhr.send(JSON.stringify({ name }));
         }
 
-        // Delete a user
+        // Delete: Remove a user by ID
         function deleteUser(id) {
-            fetch(`${personalApiURL}/${id}`, { method: 'DELETE' })
-                .then(() => fetch(`${accountApiURL}/${id}`, { method: 'DELETE' }))
-                .then(() => getUsers());
+            const xhr = new XMLHttpRequest();
+            xhr.open('DELETE', `${apiURL}/${id}`, true);
+            xhr.onload = function() {
+                if (xhr.status === 200) getUsers(); // Reload user list after deletion
+            };
+            xhr.send();
         }
 
-        // Edit user details
-        function editUser(id) {
-            const newName = prompt('Enter new name');
-            const newUsername = prompt('Enter new username');
-            const newEmail = prompt('Enter new email');
+        // Update: Edit a user's name
+        function editUser(id, currentName) {
+            const newName = prompt('Enter new name', currentName);
+            if (!newName) return;
 
-            // Update personal info
-            fetch(`${personalApiURL}/${id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name: newName })
-            })
-            .then(response => response.json())
-            .then(() => {
-                // Update account info
-                fetch(`${accountApiURL}/${id}`, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username: newUsername, email: newEmail })
-                })
-                .then(() => getUsers());
-            });
+            const xhr = new XMLHttpRequest();
+            xhr.open('PUT', `${apiURL}/${id}`, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function() {
+                if (xhr.status === 200) getUsers(); // Reload user list after update
+            };
+            xhr.send(JSON.stringify({ name: newName }));
         }
 
-        // Load users on page load
-        window.onload = getUsers;
+        // Initial load
+        getUsers();
     </script>
 </body>
 </html>
