@@ -16,7 +16,7 @@
     <script>
         const apiURL = 'http://localhost:3000/personalInfo'; 
 
-        // Read: Fetch all users and display them
+        // Read
         function getUsers() {
             const xhr = new XMLHttpRequest();
             xhr.open('GET', apiURL, true);
@@ -36,7 +36,7 @@
             xhr.send();
         }
 
-        // Create: Add a new user
+        // Create
         function createUser() {
             const name = document.getElementById('name').value;
             if (!name) return alert('Enter a name');
@@ -45,12 +45,12 @@
             xhr.open('POST', apiURL, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.onload = function() {
-                if (xhr.status === 201) getUsers(); // Reload user list after creation
+                if (xhr.status === 201) getUsers(); 
             };
             xhr.send(JSON.stringify({ name }));
         }
 
-        // Delete: Remove a user by ID
+        // Delete
         function deleteUser(id) {
             const xhr = new XMLHttpRequest();
             xhr.open('DELETE', `${apiURL}/${id}`, true);
@@ -60,7 +60,7 @@
             xhr.send();
         }
 
-        // Update: Edit a user's name
+        // Update
         function editUser(id, currentName) {
             const newName = prompt('Enter new name', currentName);
             if (!newName) return;
@@ -69,12 +69,11 @@
             xhr.open('PUT', `${apiURL}/${id}`, true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.onload = function() {
-                if (xhr.status === 200) getUsers(); // Reload user list after update
+                if (xhr.status === 200) getUsers();
             };
             xhr.send(JSON.stringify({ name: newName }));
         }
 
-        // Initial load
         getUsers();
     </script>
 </body>
